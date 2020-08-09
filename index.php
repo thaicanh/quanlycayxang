@@ -54,6 +54,7 @@ if(isset($_GET['1'])){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+
   <title>Trang chủ</title>
    <!-- css của table--> 
     <style type="text/css">
@@ -87,7 +88,7 @@ if(isset($_GET['1'])){
 }
     </style>
   <!-- Custom fonts for this template-->
-<!--   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" > -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
@@ -226,10 +227,34 @@ if(isset($_GET['1'])){
 
         </nav>
         <!-- End of Topbar -->
-
+  
         <!-- Begin Page Content -->
         <div class="container-fluid">
+            <!-- Button trigger modal -->
+        <!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Launch demo modal
+          </button> -->
 
+              <!-- Modal -->
+              <div class="modal fade bg-danger" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">NGUY HIỂM CHẾT NGỪ</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body bg-danger">
+                      <p class="text-white">HỆ THỐNG XIN THONG BÁO, CAY XANG CUA BAN SAP CHAY</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dữ liệu</h1>
@@ -247,22 +272,23 @@ if(isset($_GET['1'])){
                     <th>Tên Cảm Biến</th>
                     <th>Dữ Liệu Từ Cảm Biến</th>
                     <th>Đơn Vị</th>
+                    <th>Muc canh bao</th>
                     <th>Thời Gian</th>
                   </tr>
                     <tr>
                       <td><?php echo $sensor_1['tensensor']?></td>
-                      <td><?php echo $sensor_1['data']?></td>
+                      <td id="val_<?= $sensor_1['idsensor'] ?>"><?php echo $sensor_1['data']?></td>
                       <td><?php echo $sensor_1['unit']?></td>
-                      <td><?php echo $sensor_1['time']?></td>
-                      
-
+                      <td><?= $sensor_1['muc_canh_bao'] ?></td>
+                      <td id="time_<?= $sensor_1['idsensor'] ?>"> <?php echo $sensor_1['time']?></td>
+                    
                     </tr>
                     <tr>
                       <td><?php echo $sensor_2['tensensor']?></td>
-                      <td><?php echo $sensor_2['data']?></td>
+                      <td id="val_<?= $sensor_2['idsensor'] ?>"><?php echo $sensor_2['data']?></td>
                       <td><?php echo $sensor_2['unit']?></td>
-                      <td><?php echo $sensor_2['time']?></td>
-                      
+                      <td><?= $sensor_2['muc_canh_bao'] ?></td>
+                      <td id="time_<?= $sensor_1['idsensor'] ?>"><?php echo $sensor_2['time']?></td>
                     </tr>
                 </table>
               </div>
@@ -477,7 +503,40 @@ if(isset($_GET['1'])){
   <!-- Page level custom scripts -->
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
+  <script>
+    $(document).ready(function($) {
+       setInterval(function (e) {
+          $.get('getData.php?id=1', function(response) {
+            dataResponse = $.parseJSON(response);
+            // console.log(dataResponse);
+            const values = parseFloat(dataResponse['data']);
+            const time = dataResponse['time'];
+            const threshold = parseFloat(dataResponse['muc_canh_bao']);
+            if (values >= threshold) {
+              console.log(values + " - " + threshold);
+              $('#exampleModal').modal("show");
+            }
+            $('#val_1').html(values);
+            $('#time_1').html(time);
 
+          });
+          $.get('getData.php?id=2', function(response) {
+            dataResponse = $.parseJSON(response);            
+            const values = parseFloat(dataResponse['data']);
+            const time = dataResponse['time'];
+            const threshold = parseFloat(dataResponse['muc_canh_bao']);
+            if (values >= threshold) {
+              console.log(values + " - " + threshold);
+              $('#exampleModal').modal("show");
+            }     
+            // console.log(values);
+            // console.log(time);
+            $('#val_2').html(values);
+            $('#time_2').html(time);
+          });
+       },100);
+    });
+  </script>
 </body>
 
 </html>
