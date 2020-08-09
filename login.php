@@ -5,7 +5,7 @@
     $username="sql12359268";
     $pass ="lBI48EpC4d";
     $dbName ="sql12359268";
-    echo $hostName . " " . $username;
+//     echo $hostName . " " . $username;
   $ketnoi = mysqli_connect($hostName,$username ,$pass,$dbName) or die("khong the ket noi");    
     if(isset($_POST['username'])){
       $usn = $_POST['username'];
