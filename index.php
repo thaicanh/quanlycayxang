@@ -54,7 +54,6 @@ if(isset($_GET['1'])){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <base href="http://quanlicayxang.herokuapp.com/" >
   <title>Trang chủ</title>
    <!-- css của table--> 
     <style type="text/css">
