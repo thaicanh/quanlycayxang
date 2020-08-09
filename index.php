@@ -1,6 +1,16 @@
 
 
 <?php
+    session_start();
+    if (!array_key_exists("usrname", $_SESSION)) {
+      header("location:login.php");
+    }
+    if (isset($_POST['logout'])) {
+      unset($_SESSION['usrname']);
+       // print_r($_SESSION);
+      header("location:login.php");
+    }
+   
     $hostName="localhost";
     $username="root";
     $pass ="";
@@ -11,7 +21,7 @@ if(isset($_GET['1'])){
       date_default_timezone_set('Asia/Ho_Chi_Minh');
       $time = date('Y-m-d H:i:s');
       $duaDuLieuDoCSDL = "INSERT INTO `value` (`idsensor`, `data`, `time`, `unit`) VALUES('1','$values','$time','°C')";
-      echo $duaDuLieuDoCSDL;
+      // echo $duaDuLieuDoCSDL;
         $query = mysqli_query($ketnoi,$duaDuLieuDoCSDL) or die("die" . $query);
   }
   if(isset($_GET['2'])){
@@ -19,7 +29,7 @@ if(isset($_GET['1'])){
       date_default_timezone_set('Asia/Ho_Chi_Minh');
       $time = date('Y-m-d H:i:s');
       $duaDuLieuDoCSDL = "INSERT INTO `value` (`idsensor`, `data`, `time`, `unit`) VALUES('2','$values','$time','PPM')";
-      echo $duaDuLieuDoCSDL;
+      // echo $duaDuLieuDoCSDL;
         $query = mysqli_query($ketnoi,$duaDuLieuDoCSDL) or die("die" . $query);
         
   }
@@ -441,8 +451,11 @@ if(isset($_GET['1'])){
         </div>
         <div class="modal-body">Chọn "Log out" bên dưới nếu bạn đã sẵn sàng kết thúc.</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.php">Log out</a>
+          <form action="" method="POST">          
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" name="logout">Log out</button>
+          </form>
+
         </div>
       </div>
     </div>

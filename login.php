@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $hostName="localhost";
     $username="root";
     $pass ="";
@@ -10,6 +11,10 @@
         $query = "SELECT * FROM `admin` WHERE `username` = '$usn' and `password` ='$pw'";
         $result = mysqli_query($ketnoi,$query);
         if($result->num_rows != 0){
+          $admin = $result->fetch_assoc();
+          print_r($admin);
+          $_SESSION['usrname'] = $admin['username'];
+          // print_r($_SESSION);
           header("location:index.php");
         }
     }
