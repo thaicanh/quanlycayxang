@@ -15,11 +15,7 @@
        // print_r($_SESSION);
       header("location:login.php");
     }
-   
-    $hostName="localhost";
-    $username="root";
-    $pass ="";
-    $dbName ="quanlicayxang";
+ 
   $ketnoi = mysqli_connect($hostName,$username ,$pass,$dbName) or die("khong the ket noi");    
 if(isset($_GET['1'])){
       $values = $_GET['1'];
