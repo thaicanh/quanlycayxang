@@ -2,6 +2,11 @@
 
 <?php
     session_start();
+    $hostName="sql12.freemysqlhosting.net";
+    $username="sql12359268";
+    $pass ="lBI48EpC4d";
+    $dbName ="sql12359268";
+
     if (!array_key_exists("usrname", $_SESSION)) {
       header("location:login.php");
     }
