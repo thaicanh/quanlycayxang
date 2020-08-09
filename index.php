@@ -272,7 +272,7 @@ if(isset($_GET['1'])){
                     <th>Tên Cảm Biến</th>
                     <th>Dữ Liệu Từ Cảm Biến</th>
                     <th>Đơn Vị</th>
-                    <th>Muc canh bao</th>
+                    <th>Mức Cảnh Báo</th>
                     <th>Thời Gian</th>
                   </tr>
                     <tr>
