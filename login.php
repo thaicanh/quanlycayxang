@@ -1,9 +1,9 @@
 <?php
     session_start();
-    $hostName="localhost";
-    $username="root";
-    $pass ="";
-    $dbName ="quanlicayxang";
+    $hostName="sql12.freemysqlhosting.net";
+    $username="sql12359268";
+    $pass ="lBI48EpC4d";
+    $dbName ="sql12359268";
   $ketnoi = mysqli_connect($hostName,$username ,$pass,$dbName) or die("khong the ket noi");    
     if(isset($_POST['username'])){
       $usn = $_POST['username'];
