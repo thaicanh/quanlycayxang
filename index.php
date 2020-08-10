@@ -56,6 +56,7 @@ if(isset($_GET['1'])){
   <meta name="author" content="">
 
   <title>Trang chủ</title>
+   <meta http-equiv="refresh" content="2">
    <!-- css của table--> 
     <style type="text/css">
         table, th, td{
